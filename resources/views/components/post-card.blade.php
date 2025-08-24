@@ -1,9 +1,13 @@
 @props([
+    'id',
     'title',
     'text',
     'tags',
+    'status',
     'created_at',
-    'updated_at'
+    'updated_at',
+    'showAdminBtns',
+    'showSendBtn',
 ])
 
 <div class="p-3 shadow-md rounded-md bg-white flex flex-col gap-3">
@@ -30,14 +34,14 @@
     </div>
     @if(isset($showAdminBtns) && $showAdminBtns)
         <div class="self-center mt-auto flex gap-3">
-            <form action="{{ route('post.statusChange', ['POST_ID' => $id, 'STATUS' => \App\Models\Post::STATUS_REJECTED]) }}" method="POST">
+            <form action="{{ route('posts.statusChange', ['POST_ID' => $id, 'STATUS' => \App\Models\Post::STATUS_REJECTED]) }}" method="POST">
                 @csrf
                 <x-danger-button>
                     {{ __('Reject') }}
                 </x-danger-button>
             </form>
 
-            <form action="{{ route('post.statusChange', ['POST_ID' => $id, 'STATUS' => \App\Models\Post::STATUS_PUBLISHED]) }}" method="POST">
+            <form action="{{ route('posts.statusChange', ['POST_ID' => $id, 'STATUS' => \App\Models\Post::STATUS_PUBLISHED]) }}" method="POST">
                 @csrf
                 <x-primary-button>
                     {{ __('Publish') }}
@@ -47,7 +51,7 @@
     @endif
     @if(isset($showSendBtn) && $showSendBtn && $status === \App\Models\Post::STATUS_DRAFT)
         <div class="self-center mt-auto flex gap-3">
-            <form action="{{ route('post.statusChange', ['POST_ID' => $id, 'STATUS' => \App\Models\Post::STATUS_PENDING]) }}" method="POST">
+            <form action="{{ route('posts.statusChange', ['POST_ID' => $id, 'STATUS' => \App\Models\Post::STATUS_PENDING]) }}" method="POST">
                 @csrf
                 <x-primary-button>
                     {{ __('Send') }}
