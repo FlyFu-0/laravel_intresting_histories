@@ -7,7 +7,7 @@
 
     <x-cards-grid>
         @foreach($posts as $post)
-            <x-card
+            <x-post-card
                 :title="$post->title"
                 :text="$post->text"
                 :created_at="$post->created_at"
@@ -16,5 +16,4 @@
             />
         @endforeach
     </x-cards-grid>
-
 </x-app-layout>

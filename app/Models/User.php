@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -46,11 +47,19 @@ class User extends Authenticatable
         ];
     }
 
+    public function isAdmin(): bool {
+        return $this->roles()->whereIn('name', ['admin', 'main_admin'])->exists();
+    }
+
      public function roles() {
         return $this->belongsToMany(Role::class)->as('roles');
      }
 
      public function posts() {
         return $this->hasMany(Post::class, 'created_by', 'id');
+     }
+
+     public function session() {
+        return $this->hasOne(Session::class)->latestOfMany();
      }
 }

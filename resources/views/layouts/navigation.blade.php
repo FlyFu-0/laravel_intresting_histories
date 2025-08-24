@@ -19,7 +19,7 @@
                         <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                                <x-nav-link :href="route('my-posts')" :active="request()->routeIs('my-posts')">
+                                <x-nav-link :href="route('posts.my')" :active="request()->routeIs('posts.my')">
                                     {{ __('My Posts') }}
                                 </x-nav-link>
 
@@ -32,19 +32,23 @@
                         </x-slot>
 
                         <x-slot name="content">
-                            <x-dropdown-link :href="route('add-post')">
+                            <x-dropdown-link :href="route('posts.add')">
                                 {{ __('Add') }}
                             </x-dropdown-link>
                         </x-slot>
                     </x-dropdown>
                     </div>
-                    <x-nav-link :href="route('requests')" :active="request()->routeIs('requests')">
+                    <x-nav-link :href="route('posts.requests')" :active="request()->routeIs('posts.requests')">
                         {{ __('Requests') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('tags.all')" :active="request()->routeIs('tags.all')">
+                        {{ __('Tags') }}
                     </x-nav-link>
                 </div>
             </div>
 
             <!-- Settings Dropdown -->
+            @if(Auth::user())
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
@@ -77,6 +81,7 @@
                     </x-slot>
                 </x-dropdown>
             </div>
+            @endif
 
             <!-- Hamburger -->
             <div class="-me-2 flex items-center sm:hidden">
@@ -99,6 +104,7 @@
         </div>
 
         <!-- Responsive Settings Options -->
+        @if(Auth::user())
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             <div class="px-4">
                 <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
@@ -122,5 +128,6 @@
                 </form>
             </div>
         </div>
+        @endif
     </div>
 </nav>

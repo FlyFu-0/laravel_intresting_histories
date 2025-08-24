@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostAddRequest;
+use App\Http\Requests\PostStatusChangeRequest;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
@@ -9,52 +11,52 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function index(Request $request) {
-        //TODO: make handler for unauth user
-        if (!$request->user() || !$request->user()->id) {
-            return redirect(route('login'));
-        }
-
-        $posts = Post::where('status', Post::STATUS_PUBLISHED)->latest()->get();
+        $posts = Post::with('tags')->where('status', Post::STATUS_PUBLISHED)->latest()->get();
         return view('post.feed', [
             'posts' => $posts
         ]);
     }
 
     public function myPosts(Request $request) {
-        $posts = Post::where('created_by', $request->user()->id)->latest()->get();
+        $posts = Post::with('tags')->where('created_by', $request->user()->id)->latest()->get();
 
         return view('post.my-posts', [
             'posts' => $posts
         ]);
     }
 
-    public function addPost(Request $request) {
-
-        if ($request->isMethod(Request::METHOD_POST)) {
-            $newPost = new Post;
-            $newPost->title = $request->input('title');
-            $newPost->text = $request->input('text');
-            $newPost->created_by = $request->user()->id;
-            $newPost->save();
-
-            return redirect(route('my-posts'));
-        }
-
+    public function addPost() {
         $tags = Tag::all();
         return view('post.add', ['tags' => $tags]);
     }
 
+    public function create(PostAddRequest $request) {
+        $validated = $request->validated();
+
+        $newPost = new Post;
+        $newPost->title = $validated['title'];
+        $newPost->text = $validated['text'];
+        $newPost->status = $request->input('publish') === 'on' ? Post::STATUS_PENDING : Post::STATUS_DRAFT;
+        $newPost->created_by = $request->user()->id;
+        $newPost->save();
+
+        return redirect(route('posts.my'));
+    }
+
     public function requests(Request $request) {
-        $posts = Post::all()->where('status', Post::STATUS_PENDING);
+        $posts = Post::with('tags')->where('status', Post::STATUS_PENDING)->latest()->get();
         return view('post.requests', [
             'posts' => $posts
         ]);
     }
 
-    public function statusChange(Request $request) {
-        $post = Post::find($request->get('POST_ID'));
-        $post->status = $request->get('STATUS');
+    public function statusChange(PostStatusChangeRequest $request) {
+        $validatedData = $request->validated();
+
+        $post = Post::find($validatedData['POST_ID']);
+        $post->status = $validatedData['STATUS'];
         $post->save();
+
         return redirect()->back();
     }
 }

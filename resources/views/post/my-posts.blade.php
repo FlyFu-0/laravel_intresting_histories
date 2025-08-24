@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-cards-grid>
         @foreach($posts as $post)
-            <x-card
+            <x-post-card
                 :id="$post->id"
                 :title="$post->title"
                 :text="$post->text"
