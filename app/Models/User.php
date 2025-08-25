@@ -62,4 +62,12 @@ class User extends Authenticatable
      public function session() {
         return $this->hasOne(Session::class)->latestOfMany();
      }
+
+     public function isBanned(): bool {
+        return $this->banned_at > $this->unbanned_at;
+     }
+
+    public function isMuted(): bool {
+        return $this->muted_until > now();
+    }
 }

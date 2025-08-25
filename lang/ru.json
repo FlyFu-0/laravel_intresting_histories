@@ -1,0 +1,54 @@
+{
+    "Save": "Сохранить",
+    "Cancel": "Отменить",
+    "Reset": "Очистить",
+    "Find": "Найти",
+    "Publish": "Опубликовать",
+    "Reject": "Отклонить",
+    "Search": "Поиск",
+
+    "Published": "Опубликована",
+    "Pending": "На модерации",
+    "Draft": "Черновик",
+    "Rejected": "Отклонена",
+
+    "Story Title": "Название истории",
+    "My shopping story": "Мой шоппинг",
+    "Story": "История",
+    "Write a few sentences about your story": "Расскажите свою историю",
+    "Send to moderation just after save": "Отправить историю на модерацию сразу после сохранения",
+
+    "New Tag": "Новый тег",
+    "Password": "Пароль",
+    "Current Password": "Текущий пароль",
+    "Confirm Password": "Подтвердите пароль",
+
+    "Users Manage": "Управление пользователями",
+    "Tags Manage": "Управление тегами",
+    "Publish Requests": "Запросы на публикацию",
+    "Share Story": "Поделиться историей",
+    "My Stories": "Мои истории",
+
+    "Profile Name": "Имя пользователя",
+    "Profile Information": "Информация профиля",
+    "Update your account's profile information and email address": "Здесь вы можете изменить информацию о профили и email",
+
+    "Update Password": "Смена пароля",
+    "Ensure your account is using a long, random password to stay secure": "Убедитесь, что ваш аккаунт защищён сильным паролем",
+
+    "Delete Account": "Удалить аккаунт",
+    "Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain": "Ваш аккаунт будет удален навсегда. Убедитесь, что вы сохранили нужную вам информацию",
+    "Are you sure you want to delete your account": "Подтвердите удаление аккаунта",
+    "Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account": "После подтверждения ваш аккаунт будет удален. Введите пароль, что бы потвердить удаление",
+
+    "Profile": "Профиль",
+    "Remember me": "Запомнить меня",
+    "Log in": "Войти",
+    "Register": "Зарегистрироваться",
+    "Log Out": "Выйти",
+
+    "Forgot your password": "Забыли пароль",
+    "No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one": "Нет проблем. Введите свой email и мы отправим вам ссылку для восстановления пароля",
+    "Email Password Reset Link": "Отправить ссылку",
+    "Already registered": "Уже есть аккаунт"
+}

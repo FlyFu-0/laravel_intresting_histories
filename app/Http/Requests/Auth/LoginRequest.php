@@ -41,11 +41,18 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        if (!Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
                 'email' => trans('auth.failed'),
+            ]);
+        }
+
+        if ($this->user()->isBanned()) {
+            Auth::logout();
+            throw ValidationException::withMessages([
+                'email' => "User with email {$this->get('email')} is Banned."
             ]);
         }
 

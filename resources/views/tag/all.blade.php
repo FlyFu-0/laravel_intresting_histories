@@ -1,11 +1,13 @@
 <x-app-layout>
     <x-card>
         <div class="flex flex-col gap-5">
-            <form action="{{route('tags.create')}}" class="inline-flex gap-3" method="POST">
-                @csrf
-                <x-text-input type="text" name="name" placeholder="Add new tag" />
-                <x-primary-button>{{__('messages.save')}}</x-primary-button>
-            </form>
+            <x-input-button-inline
+               action="{{route('tags.create')}}"
+               method="POST"
+               name="name"
+               placeholder="{{__('New Tag')}}"
+               buttonText="{{__('Save')}}"
+            />
             <div class="inline-flex gap-3">
                 @foreach($tags as $tag)
                     <x-tag-badge

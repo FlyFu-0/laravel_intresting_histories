@@ -10,15 +10,15 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function index(Request $request) {
+    public function index() {
         $posts = Post::with('tags')->where('status', Post::STATUS_PUBLISHED)->latest()->get();
         return view('post.feed', [
             'posts' => $posts
         ]);
     }
 
-    public function myPosts(Request $request) {
-        $posts = Post::with('tags')->where('created_by', $request->user()->id)->latest()->get();
+    public function myPosts() {
+        $posts = Post::with('tags')->where('created_by', auth()->user()->id)->latest()->get();
 
         return view('post.my-posts', [
             'posts' => $posts

@@ -15,9 +15,7 @@
         <div class="flex justify-between">
             <h4 class="font-bold">{{$title}}</h4>
             @if(isset($status))
-            <div class="py-0.5 px-3 border rounded-full">
-                    <span>{{$status}}</span>
-            </div>
+                <x-status-badge :text="$status"/>
             @endif
         </div>
         @if(isset($updated_at))
@@ -53,7 +51,7 @@
             <form action="{{ route('posts.statusChange', ['POST_ID' => $id, 'STATUS' => \App\Models\Post::STATUS_PENDING]) }}" method="POST">
                 @csrf
                 <x-primary-button>
-                    {{ __('Send') }}
+                    {{ __('Publish') }}
                 </x-primary-button>
             </form>
         </div>
