@@ -1,9 +1,9 @@
 @props(['placeholder' => 'Search', 'name' => 'search', 'buttonText' => 'Find'])
 
 <div class="flex flex-col">
-    <form {{ $attributes->merge(['action' => '', 'class' => 'inline-flex gap-3']) }}>
+    <form {{ $attributes->merge(['action' => '', 'class' => 'inline-flex gap-3 flex-wrap sm:flex-nowrap']) }}>
         @csrf
-        <x-text-input type="text" name="{{$name}}" placeholder="{{__($placeholder)}}" />
+        <x-text-input type="text" name="{{$name}}" class="w-full xs:w-fit" placeholder="{{__($placeholder)}}" />
         <x-primary-button type="submit">
             {{__($buttonText)}}
         </x-primary-button>

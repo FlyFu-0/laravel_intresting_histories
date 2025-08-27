@@ -40,6 +40,9 @@ class PostController extends Controller
         $newPost->created_by = $request->user()->id;
         $newPost->save();
 
+        $newPost->tags()->attach($validated['tags']);
+        $newPost->save();
+
         return redirect(route('posts.my'));
     }
 

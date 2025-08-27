@@ -23,7 +23,6 @@ class PostStatusChangeRequest extends FormRequest
             return true;
         }
 
-
         return $this->user()->id === $post->created_by
             && $post->status === 'draft'
             && $newStatus === Post::STATUS_PENDING;

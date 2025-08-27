@@ -23,7 +23,7 @@ class PostAddRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'text' => 'required|min:30',
+            'text' => 'required',
             'tags' => 'nullable|exists:tags,id',
         ];
     }

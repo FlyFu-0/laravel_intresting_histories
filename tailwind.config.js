@@ -14,8 +14,23 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            screens: {
+                'xs': '320px',
+            }
         },
     },
 
     plugins: [forms],
+
+    safelist: [
+        'border-red-500',
+        'border-green-500',
+        'border-yellow-500',
+        'border-gray-500',
+
+        'text-red-500',
+        'text-green-500',
+        'text-yellow-500',
+        'text-gray-500',
+    ],
 };
