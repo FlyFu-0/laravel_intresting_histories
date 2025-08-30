@@ -1,13 +1,10 @@
 @props([
-    'id',
     'title',
     'text',
     'tags',
     'status',
     'created_at',
     'updated_at',
-    'showAdminBtns',
-    'showSendBtn',
 ])
 
 <x-card>
@@ -29,32 +26,8 @@
                 <x-tag-badge text="{{$tag}}" />
             @endforeach
         </div>
-        @if(isset($showAdminBtns) && $showAdminBtns)
-            <div class="self-center mt-auto flex gap-3">
-                <form action="{{ route('posts.statusChange', ['POST_ID' => $id, 'STATUS' => \App\Models\Post::STATUS_REJECTED]) }}" method="POST">
-                    @csrf
-                    <x-danger-button>
-                        {{ __('Reject') }}
-                    </x-danger-button>
-                </form>
-
-                <form action="{{ route('posts.statusChange', ['POST_ID' => $id, 'STATUS' => \App\Models\Post::STATUS_PUBLISHED]) }}" method="POST">
-                    @csrf
-                    <x-primary-button>
-                        {{ __('Publish') }}
-                    </x-primary-button>
-                </form>
-            </div>
-        @endif
-        @if(isset($showSendBtn) && $showSendBtn && $status === \App\Models\Post::STATUS_DRAFT)
         <div class="self-center mt-auto flex gap-3">
-            <form action="{{ route('posts.statusChange', ['POST_ID' => $id, 'STATUS' => \App\Models\Post::STATUS_PENDING]) }}" method="POST">
-                @csrf
-                <x-primary-button>
-                    {{ __('Publish') }}
-                </x-primary-button>
-            </form>
+            {{ $slot }}
         </div>
-    @endif
     </div>
 </x-card>

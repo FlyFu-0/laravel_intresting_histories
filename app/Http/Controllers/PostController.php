@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostAddRequest;
+use App\Http\Requests\PostDeleteRequest;
 use App\Http\Requests\PostStatusChangeRequest;
 use App\Models\Post;
 use App\Models\Tag;
@@ -28,6 +29,15 @@ class PostController extends Controller
     public function addPost() {
         $tags = Tag::all();
         return view('post.add', ['tags' => $tags]);
+    }
+
+    public function delete(PostDeleteRequest $request) {
+        $validated = $request->validated();
+
+        $post = Post::find($validated['POST_ID']);
+        $post->delete();
+
+        return redirect()->route('posts.my');
     }
 
     public function create(PostAddRequest $request) {

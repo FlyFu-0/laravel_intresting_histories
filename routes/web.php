@@ -8,7 +8,7 @@ use App\Http\Middleware\ {
 };
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [PostController::class, 'index'])->name('home');
+Route::get('/', [PostController::class, 'index'])->name('index');
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 
 Route::middleware('auth')->group(function () {
@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
         Route::get( '/add', [PostController::class, 'addPost'])->name('posts.add');
         Route::post( '/create', [PostController::class, 'create'])->name('posts.create');
         Route::post('/statusChange', [PostController::class, 'statusChange'])->name('posts.statusChange');
+        Route::delete('/delete', [PostController::class, 'delete'])->name('posts.delete');
         Route::middleware([CanManagePosts::class])->group(function () {
             Route::match(['get', 'post'], '/requests', [PostController::class, 'requests'])->name('posts.requests');
         });
