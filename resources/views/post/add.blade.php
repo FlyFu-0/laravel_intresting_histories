@@ -31,13 +31,6 @@
                             </div>
                         </div>
                     </div>
-                    {{--<div class="mt-6 space-y-6">
-                        <select name="tags" multiple class="rounded-md min-w-32">
-                            @foreach($tags as $tag)
-                                <option value="{{$tag->id}}">{{$tag->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>--}}
                     <div class="mt-6 space-y-6">
                         <div class="flex gap-3">
                             <div class="flex h-6 shrink-0 items-center">
@@ -71,7 +64,7 @@
 </x-app-layout>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', () => {
         window.initTagsInput(@json($tags));
     });
 </script>

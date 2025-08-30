@@ -6,7 +6,7 @@
                 :text="$post->text"
                 :created_at="$post->created_at"
                 :tags="$post->tags->pluck('name')"
-                showAdminBtns="true"
+                :user="$post->user->name"
             >
                 <form action="{{ route('posts.statusChange', ['POST_ID' => $post->id, 'STATUS' => \App\Models\Post::STATUS_REJECTED]) }}" method="POST">
                     @csrf

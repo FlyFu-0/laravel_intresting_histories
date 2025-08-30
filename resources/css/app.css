@@ -38,7 +38,7 @@
 }
 
 .ts-chip {
-    @apply text-center justify-center mx-auto bg-gray-600 text-gray-200 rounded-full px-3 py-1 text-sm font-medium inline-flex items-center;
+    @apply text-center justify-center mx-auto border text-black dark:border-0 dark:bg-gray-600 dark:text-gray-200 rounded-full px-3 py-1 text-sm font-medium inline-flex items-center;
 }
 
 .ts-chip-text {

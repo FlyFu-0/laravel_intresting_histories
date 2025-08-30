@@ -24,7 +24,7 @@ class PostAddRequest extends FormRequest
         return [
             'title' => 'required',
             'text' => 'required',
-            'tags' => 'nullable|exists:tags,id',
+            'tags' => 'required|exists:tags,id',
         ];
     }
 }

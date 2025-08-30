@@ -10,9 +10,9 @@
             <x-post-card
                 :title="$post->title"
                 :text="$post->text"
-                :created_at="$post->created_at"
                 :updated_at="$post->updated_at"
                 :tags="$post->tags->pluck('name')"
+                :user="$post->user->name"
             />
         @endforeach
     </x-cards-grid>

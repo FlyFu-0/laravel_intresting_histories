@@ -12,8 +12,8 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function index() {
-        $posts = Post::with('tags')->where('status', Post::STATUS_PUBLISHED)->latest()->get();
-        return view('post.feed', [
+        $posts = Post::with(['tags', 'user'])->where('status', Post::STATUS_PUBLISHED)->latest()->get();
+        return view('post.index', [
             'posts' => $posts
         ]);
     }
