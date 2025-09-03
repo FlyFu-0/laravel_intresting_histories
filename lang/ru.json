@@ -8,6 +8,17 @@
     "Search": "Поиск",
     "Delete": "Удалить",
     "Written by": "История от",
+    "Hide Post": "Спрятать",
+
+    "Ban until": "Забанить до",
+    "Banned": "Забанен",
+    "Ban": "Забанить",
+    "Unban": "Разабанить",
+    "User is Banned": "Пользователь заблокирован",
+    "Mute until": "Заглушить до",
+    "Muted until :date_until": "Заглушен до :date_until",
+    "Mute": "Заглушить",
+    "Unmute": "Разглушить",
 
     "Deleting Post": "Удаление истории",
     "Are you sure you want to delete post": "Вы уверены, что хотите удалить историю",

@@ -5,7 +5,6 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\App;
 
 class Post extends Model
 {
@@ -26,7 +25,7 @@ class Post extends Model
     {
         return Attribute::make(
             get: function (string $value) {
-                $carbonDate = Carbon::parse($value)->locale(App::getLocale());
+                $carbonDate = Carbon::parse($value);
                 return $carbonDate->translatedFormat($this->getDatetimeFormat($carbonDate));
             },
         );

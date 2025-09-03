@@ -51,6 +51,15 @@
                             {{ __('Publish') }}
                         </x-primary-button>
                     </form>
+                @elseif ($post->status === \App\Models\Post::STATUS_PUBLISHED)
+                    <form
+                        action="{{ route('posts.statusChange', ['POST_ID' => $post->id, 'STATUS' => \App\Models\Post::STATUS_DRAFT]) }}"
+                        method="POST">
+                        @csrf
+                        <x-secondary-button type="submit">
+                            {{ __('Hide Post') }}
+                        </x-secondary-button>
+                    </form>
                 @endif
             </x-post-card>
         @endforeach

@@ -20,7 +20,6 @@ class PostController extends Controller
 
     public function myPosts() {
         $posts = Post::with('tags')->where('created_by', auth()->user()->id)->latest()->get();
-
         return view('post.my-posts', [
             'posts' => $posts
         ]);

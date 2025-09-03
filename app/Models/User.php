@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Carbon\Carbon;
+use Carbon\CarbonTimeZone;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -64,10 +66,10 @@ class User extends Authenticatable
      }
 
      public function isBanned(): bool {
-        return $this->banned_at > $this->unbanned_at;
+        return $this->unbanned_at > now(3);
      }
 
     public function isMuted(): bool {
-        return $this->muted_until > now();
+        return $this->muted_until > now(3);
     }
 }

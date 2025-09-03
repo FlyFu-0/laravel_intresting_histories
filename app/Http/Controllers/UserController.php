@@ -8,11 +8,8 @@ use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
-    public function index(Request $request) {
-        if (!Gate::allows('can-manage-users')) {
-            abort(403);
-        }
-
+    public function index(Request $request)
+    {
         $search = $request->input('search');
 
         $users = [];
@@ -23,5 +20,27 @@ class UserController extends Controller
         }
 
         return view('user.user-manage', ['users' => $users]);
+    }
+
+    public function mute(Request $request, User $user)
+    {
+        Gate::authorize('mute', $user);
+
+        $user->muted_at = now();
+        $user->muted_until = $request->get('until') ?: now();
+        $user->save();
+
+        return redirect()->back();
+    }
+
+    public function ban(Request $request, User $user)
+    {
+        Gate::authorize('ban', $user);
+
+        $user->banned_at = now();
+        $user->unbanned_at = $request->get('until') ?: now();
+        $user->save();
+
+        return redirect()->back();
     }
 }

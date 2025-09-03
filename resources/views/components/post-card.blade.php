@@ -16,13 +16,15 @@
             @endif
         </div>
         <div class="text-sm/6">
-            <p>{{__('Written by')}} <span class="font-semibold">{{$user}}</span></p>
+            @if($user)
+                <p>{{__('Written by')}} <span class="font-semibold">{{$user}}</span></p>
+            @endif
             <span>{{$updated_at}}</span>
         </div>
         <p class="break-words">{{$text}}</p>
         <div>
             @foreach($tags as $tag)
-                <x-tag-badge text="{{$tag}}" />
+                <x-tag-badge text="{{$tag}}"/>
             @endforeach
         </div>
         <div class="self-center mt-auto flex gap-3">

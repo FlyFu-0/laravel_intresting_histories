@@ -9,10 +9,10 @@
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                     </a>
                 </div>
-
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <div class="hidden sm:flex sm:items-center sm:ms-6">
+                    @can('viewMy', \App\Models\Post::class)
+                    <div class="hidden sm:inline-flex sm:items-center sm:ms-6">
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
                                 <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
@@ -35,13 +35,14 @@
                             </x-slot>
                         </x-dropdown>
                     </div>
-                    <x-nav-link :href="route('posts.requests')" :active="request()->routeIs('posts.requests')">
+                    @endcan
+                    <x-nav-link :href="route('posts.requests')" :active="request()->routeIs('posts.requests')" :show="auth()->check() && auth()->user()->can('viewRequests', App\Models\Post::class)">
                         {{ __('Publish Requests') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('tags.all')" :active="request()->routeIs('tags.all')">
+                    <x-nav-link :href="route('tags.all')" :active="request()->routeIs('tags.all')" :show="auth()->check() && auth()->user()->can('create', App\Models\Tag::class)">
                         {{ __('Tags Manage') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')" :show="auth()->check() && auth()->user()->can('viewAny', App\Models\User::class)">
                         {{ __('Users Manage') }}
                     </x-nav-link>
                 </div>
@@ -82,12 +83,14 @@
                     </x-dropdown>
                 </div>
             @else
-                <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
-                    {{ __('Log in') }}
-                </x-nav-link>
-                <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
-                    {{ __('Register') }}
-                </x-nav-link>
+                <div class="flex gap-5">
+                    <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                        {{ __('Log in') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                        {{ __('Register') }}
+                    </x-nav-link>
+                </div>
             @endif
 
             <!-- Hamburger -->
@@ -111,13 +114,13 @@
             <x-responsive-nav-link :href="route('posts.add')" :active="request()->routeIs('posts.add')">
                 {{ __('Share Story') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('posts.requests')" :active="request()->routeIs('posts.requests')">
+            <x-responsive-nav-link :href="route('posts.requests')" :active="request()->routeIs('posts.requests')" :show="auth()->check() && auth()->user()->can('viewRequests', App\Models\Post::class)">
                 {{ __('Publish Requests') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('tags.all')" :active="request()->routeIs('tags.all')">
+            <x-responsive-nav-link :href="route('tags.all')" :active="request()->routeIs('tags.all')" :show="auth()->check() && auth()->user()->can('create', App\Models\Tag::class)">
                 {{ __('Tags Manage') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+            <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')" :show="auth()->check() && auth()->user()->can('viewAny', App\Models\User::class)">
                 {{ __('Users Manage') }}
             </x-responsive-nav-link>
         </div>

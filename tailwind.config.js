@@ -23,6 +23,8 @@ export default {
     plugins: [forms],
 
     safelist: [
+        'bg-green-500',
+
         'border-red-500',
         'border-green-500',
         'border-yellow-500',

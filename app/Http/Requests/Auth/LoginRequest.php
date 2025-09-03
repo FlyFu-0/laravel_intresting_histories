@@ -52,7 +52,7 @@ class LoginRequest extends FormRequest
         if ($this->user()->isBanned()) {
             Auth::logout();
             throw ValidationException::withMessages([
-                'email' => "User with email {$this->get('email')} is Banned."
+                'email' => __("User is Banned") . '.',
             ]);
         }
 
