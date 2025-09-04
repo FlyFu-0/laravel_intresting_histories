@@ -42,7 +42,7 @@ class PostPolicy
     public function create(User $user): Response
     {
         if ($user->isMuted()) {
-            return Response::deny(__('You muted until :date_until', ['date_until' => $user->muted_until]));
+            return Response::deny(__('User muted until :date_until', ['date_until' => $user->muted_until]));
         }
 
         return Response::allow();

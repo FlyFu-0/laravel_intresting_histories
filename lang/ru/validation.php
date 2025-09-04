@@ -94,10 +94,10 @@ return [
     'min' => [
         'array' => 'The :attribute field must have at least :min items.',
         'file' => 'The :attribute field must be at least :min kilobytes.',
-        'numeric' => 'The :attribute field must be at least :min.',
-        'string' => 'The :attribute field must be at least :min characters.',
+        'numeric' => 'Поле должно быть не менее :min.', //:attribute
+        'string' => 'Поле должно содержать как минимум :min символов.', //:attribute
     ],
-    'min_digits' => 'The :attribute field must have at least :min digits.',
+    'min_digits' => 'Поле :attribute должно содержать как минимум :min чисел.',
     'missing' => 'The :attribute field must be missing.',
     'missing_if' => 'The :attribute field must be missing when :other is :value.',
     'missing_unless' => 'The :attribute field must be missing unless :other is :value.',
@@ -126,7 +126,7 @@ return [
     'prohibited_unless' => 'The :attribute field is prohibited unless :other is in :values.',
     'prohibits' => 'The :attribute field prohibits :other from being present.',
     'regex' => 'The :attribute field format is invalid.',
-    'required' => 'Заполните поле :attribute.',
+    'required' => 'Заполните поле.', //:attribute
     'required_array_keys' => 'The :attribute field must contain entries for: :values.',
     'required_if' => 'The :attribute field is required when :other is :value.',
     'required_if_accepted' => 'The :attribute field is required when :other is accepted.',

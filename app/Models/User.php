@@ -72,4 +72,10 @@ class User extends Authenticatable
     public function isMuted(): bool {
         return $this->muted_until > now(3);
     }
+
+    public function forceLogout(): bool
+    {
+        $this->setRememberToken(null);
+        return $this->session()->delete();
+    }
 }

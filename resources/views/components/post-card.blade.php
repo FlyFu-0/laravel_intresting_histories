@@ -27,7 +27,7 @@
                 <x-tag-badge text="{{$tag}}"/>
             @endforeach
         </div>
-        <div class="self-center mt-auto flex gap-3">
+        <div class="xs:self-center mt-auto flex flex-col xs:flex-row gap-3">
             {{ $slot }}
         </div>
     </div>

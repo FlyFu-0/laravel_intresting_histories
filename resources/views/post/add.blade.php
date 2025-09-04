@@ -49,7 +49,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex items-center justify-end gap-x-6 px-4 pb-4 sm:px-8">
+                <div class="flex flex-col xs:flex-row xs:items-center justify-end gap-3 px-4 pb-4 sm:px-8">
                     <x-secondary-button type="reset">
                         {{__('Reset')}}
                     </x-secondary-button>

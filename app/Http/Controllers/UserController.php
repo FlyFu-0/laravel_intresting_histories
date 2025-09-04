@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
@@ -26,7 +27,9 @@ class UserController extends Controller
     {
         Gate::authorize('mute', $user);
 
-        $user->muted_at = now();
+        if ($request->get('until')) {
+            $user->muted_at = now();
+        }
         $user->muted_until = $request->get('until') ?: now();
         $user->save();
 
@@ -37,7 +40,10 @@ class UserController extends Controller
     {
         Gate::authorize('ban', $user);
 
-        $user->banned_at = now();
+        if ($request->get('until')) {
+            $user->banned_at = now();
+            $user->forceLogout();
+        }
         $user->unbanned_at = $request->get('until') ?: now();
         $user->save();
 

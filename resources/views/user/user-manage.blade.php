@@ -6,7 +6,7 @@
                 @foreach($users as $user)
                     @php($isMyself = $user->id === \Illuminate\Support\Facades\Auth::user()->id)
 
-                    <li class="relative flex justify-between rounded-md gap-x-6 px-4 py-5 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-700 sm:px-6 lg:px-8 {{$isMyself ? 'bg-yellow-100 hover:bg-yellow-200' : ''}}">
+                    <li class="relative flex justify-between rounded-md gap-x-6 px-4 py-5 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-700 sm:px-6 lg:px-8 {{$isMyself ?  'bg-yellow-100 dark:bg-gray-700 hover:bg-yellow-200 dark:hover:bg-gray-600' : ''}}">
                         <div class="flex min-w-0 gap-x-4">
                             <div class="min-w-0 flex-auto">
                                 <p class="text-sm/6 font-semibold">
@@ -16,17 +16,22 @@
                                     <a href="mailto:{{$user->email}}"
                                        class="relative truncate hover:underline">{{$user->email}}</a>
                                 </p>
+                                @foreach($user->roles->pluck('name') as $role)
+                                    <p class="text-sm/6 ">{{$role}}</p>
+                                @endforeach
+                                <div class="inline-flex  sm:hidden flex-col">
+                                    <p class="text-sm/6 text-red-500">{{$user->isBanned() ? __("Banned") : ''}}</p>
+                                    <p class="text-sm/6 text-red-400">{{$user->isMuted() ? __("Muted until :date_until", ['date_until' => $user->muted_until]) : ''}}</p>
+                                </div>
                             </div>
                         </div>
                         <div class="flex shrink-0 items-center gap-x-4">
                             <div class="hidden sm:flex sm:flex-col sm:items-end">
-                                @foreach($user->roles->pluck('name') as $role)
-                                    <p class="text-sm/6 ">{{$role}}</p>
-                                @endforeach
                                 <p class="text-sm/6 text-red-500">{{$user->isBanned() ? __("Banned") : ''}}</p>
                                 <p class="text-sm/6 text-red-400">{{$user->isMuted() ? __("Muted until :date_until", ['date_until' => $user->muted_until]) : ''}}</p>
                             </div>
                             @if(!$isMyself)
+                                <div class="flex flex-col sm:flex-row gap-3">
                                 @if($user->isMuted())
                                     <form action="{{ route('users.mute', $user) }}" method="POST">
                                         @csrf
@@ -107,6 +112,7 @@
                                     </form>
                                 </x-modal>
                                 @endif
+                                </div>
                             @endif
                         </div>
                     </li>
