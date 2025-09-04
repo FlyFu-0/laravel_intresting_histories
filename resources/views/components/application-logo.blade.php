@@ -1,1 +1,1 @@
-<span class="logo">Hi</span>
+<span class="logo dark:text-gray-300">Hi</span>

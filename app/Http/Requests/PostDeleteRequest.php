@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Models\Post;
 use Illuminate\Foundation\Http\FormRequest;
 
-class PostStatusChangeRequest extends FormRequest
+class PostDeleteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,6 @@ class PostStatusChangeRequest extends FormRequest
     public function authorize(): bool
     {
         $post = Post::find($this->get('POST_ID'));
-        $newStatus = $this->get('STATUS');
 
         if (!$post) {
             return false;
@@ -23,9 +22,7 @@ class PostStatusChangeRequest extends FormRequest
             return true;
         }
 
-        return $this->user()->id === $post->created_by
-            && in_array($post->status,[Post::STATUS_DRAFT, Post::STATUS_PUBLISHED])
-            && in_array($newStatus, [Post::STATUS_PENDING, Post::STATUS_DRAFT]);
+        return $this->user()->id === $post->created_by;
     }
 
     /**
@@ -37,7 +34,6 @@ class PostStatusChangeRequest extends FormRequest
     {
         return [
             'POST_ID' => 'required|exists:posts,id',
-            'STATUS' => 'required|in:draft,pending,rejected,published',
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostAddRequest;
+use App\Http\Requests\PostDeleteRequest;
 use App\Http\Requests\PostStatusChangeRequest;
 use App\Models\Post;
 use App\Models\Tag;
@@ -11,15 +12,14 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function index() {
-        $posts = Post::with('tags')->where('status', Post::STATUS_PUBLISHED)->latest()->get();
-        return view('post.feed', [
+        $posts = Post::with(['tags', 'user'])->where('status', Post::STATUS_PUBLISHED)->latest()->get();
+        return view('post.index', [
             'posts' => $posts
         ]);
     }
 
     public function myPosts() {
         $posts = Post::with('tags')->where('created_by', auth()->user()->id)->latest()->get();
-
         return view('post.my-posts', [
             'posts' => $posts
         ]);
@@ -30,6 +30,15 @@ class PostController extends Controller
         return view('post.add', ['tags' => $tags]);
     }
 
+    public function delete(PostDeleteRequest $request) {
+        $validated = $request->validated();
+
+        $post = Post::find($validated['POST_ID']);
+        $post->delete();
+
+        return redirect()->route('posts.my');
+    }
+
     public function create(PostAddRequest $request) {
         $validated = $request->validated();
 
@@ -38,6 +47,9 @@ class PostController extends Controller
         $newPost->text = $validated['text'];
         $newPost->status = $request->input('publish') === 'on' ? Post::STATUS_PENDING : Post::STATUS_DRAFT;
         $newPost->created_by = $request->user()->id;
+        $newPost->save();
+
+        $newPost->tags()->attach($validated['tags']);
         $newPost->save();
 
         return redirect(route('posts.my'));

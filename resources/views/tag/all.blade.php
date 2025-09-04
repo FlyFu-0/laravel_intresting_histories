@@ -8,7 +8,7 @@
                placeholder="{{__('New Tag')}}"
                buttonText="{{__('Save')}}"
             />
-            <div class="inline-flex gap-3">
+            <div class="inline-flex flex-wrap gap-3">
                 @foreach($tags as $tag)
                     <x-tag-badge
                         :text="$tag->name"
