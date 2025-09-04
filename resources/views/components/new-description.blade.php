@@ -3,9 +3,9 @@
     'description'
 ])
 
-<dl class="space-y-10">
+<dl class="space-y-6">
     <div>
-        <dt class="text-base/7 font-semibold text-gray-900">{{$title}}</dt>
-        <dd class="mt-2 text-base/7 text-gray-600">{{$description}}</dd>
+        <dt class="text-base/7 font-semibold dark:text-gray-400 text-gray-900">{{$title}}</dt>
+        <dd class="text-base/7 dark:text-gray-500 text-gray-600">{{$description}}</dd>
     </div>
 </dl>
