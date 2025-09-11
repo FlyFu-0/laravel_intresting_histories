@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-cards-grid>
+    <x-cards-grid :paginator="$posts">
         @foreach($posts as $post)
             <x-post-card
                 :title="$post->title"

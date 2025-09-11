@@ -1,6 +1,10 @@
 @php use Illuminate\Http\Request; @endphp
 <x-app-layout>
-    <x-cards-grid>
+    <x-card class="mb-6">
+        <x-input-button-inline />
+    </x-card>
+
+    <x-cards-grid :paginator="$posts">
         @foreach($posts as $post)
             <x-post-card
                 :title="$post->title"

@@ -12,16 +12,26 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function index() {
-        $posts = Post::with(['tags', 'user'])->where('status', Post::STATUS_PUBLISHED)->latest()->get();
+        $posts = Post::with(['tags', 'user'])
+            ->where('status', Post::STATUS_PUBLISHED)
+            ->latest();
+
         return view('post.index', [
-            'posts' => $posts
+            'posts' => $this->paginate($posts),
         ]);
     }
 
-    public function myPosts() {
-        $posts = Post::with('tags')->where('created_by', auth()->user()->id)->latest()->get();
+    public function myPosts(Request $request) {
+
+        $search = $request->get('search');
+
+        $postsQuery = Post::with('tags')
+            ->where('created_by', auth()->user()->id)
+            ->whereAny(['title', 'text'], 'LIKE', "%$search%")
+            ->latest();
+
         return view('post.my-posts', [
-            'posts' => $posts
+            'posts' => $this->paginate($postsQuery),
         ]);
     }
 
@@ -56,9 +66,12 @@ class PostController extends Controller
     }
 
     public function requests(Request $request) {
-        $posts = Post::with('tags')->where('status', Post::STATUS_PENDING)->latest()->get();
+        $posts = Post::with(['tags', 'user'])
+            ->where('status', Post::STATUS_PENDING)
+            ->latest();
+
         return view('post.requests', [
-            'posts' => $posts
+            'posts' => $this->paginate($posts)
         ]);
     }
 

@@ -27,6 +27,12 @@
                 <x-tag-badge text="{{$tag}}"/>
             @endforeach
         </div>
+        <div class="text-sm">
+            <form action="" method="POST">
+                @csrf
+                <span>like 23</span>
+            </form>
+        </div>
         <div class="xs:self-center mt-auto flex flex-col xs:flex-row gap-3">
             {{ $slot }}
         </div>

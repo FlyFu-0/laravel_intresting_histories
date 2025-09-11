@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use function Laravel\Prompts\error;
 
 class UserController extends Controller
 {
@@ -20,7 +21,13 @@ class UserController extends Controller
                 ->get();
         }
 
-        return view('user.user-manage', ['users' => $users]);
+        if ($search && count($users) < 1) {
+            return redirect()->back()
+                ->withErrors(['search' => __('No users found for your search.')])
+                ->withInput();
+        }
+
+        return view('user.manage', ['users' => $users]);
     }
 
     public function mute(Request $request, User $user)
