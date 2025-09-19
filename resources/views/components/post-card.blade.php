@@ -24,18 +24,20 @@
             <span>{{$updated_at}}</span>
         </div>
         <p class="break-words">{{$text}}</p>
-        <div>
-            @foreach($tags as $tag)
-                <x-tag-badge text="{{$tag}}"/>
-            @endforeach
+        <div class="mt-auto">
+            <div class="inline-flex flex-wrap gap-1 gap-y-2">
+                @foreach($tags as $tag)
+                    <x-tag-badge text="{{$tag}}"/>
+                @endforeach
+            </div>
+            <div class="text-sm mt-3">
+                <form action="{{route('posts.like', $id)}}" method="POST">
+                    @csrf
+                    <button type="submit">like {{$likes}}</button>
+                </form>
+            </div>
         </div>
-        <div class="text-sm">
-            <form action="{{route('posts.like', $id)}}" method="POST">
-                @csrf
-                <button type="submit">like {{$likes}}</button>
-            </form>
-        </div>
-        <div class="xs:self-center mt-auto flex flex-col xs:flex-row gap-3">
+        <div class="xs:self-center flex flex-col xs:flex-row gap-3">
             {{ $slot }}
         </div>
     </div>

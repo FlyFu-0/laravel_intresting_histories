@@ -4,7 +4,7 @@
     'deleteMethod' => 'POST',
 ])
 
-<span class="inline-flex items-center rounded-full bg-gray-100 dark:bg-gray-700 dark:text-gray-300 px-2 py-1 text-xs font-medium text-gray-600">
+<span class="inline-flex h-fit items-center rounded-full bg-gray-100 dark:bg-gray-700 dark:text-gray-300 px-2 py-1 text-xs font-medium text-gray-600">
     {{$text}}
     @if($deleteAction)
         <form action="{{$deleteAction}}" method="POST" class="items-center inline-flex">

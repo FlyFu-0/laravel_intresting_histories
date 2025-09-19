@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+    const MAX_TITLE_LENGTH = 70;
+    const MAX_STORY_LENGTH = 700;
     const STATUS_DRAFT = 'draft';
     const STATUS_PENDING = 'pending';
     const STATUS_PUBLISHED = 'published';
