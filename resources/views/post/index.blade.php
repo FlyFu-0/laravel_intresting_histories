@@ -8,11 +8,13 @@
     <x-cards-grid :paginator="$posts">
         @foreach($posts as $post)
             <x-post-card
+                :id="$post->id"
                 :title="$post->title"
                 :text="$post->text"
                 :updated_at="$post->updated_at"
                 :tags="$post->tags->pluck('name')"
                 :user="$post->user->name"
+                :likes="$post->like->count()"
             />
         @endforeach
     </x-cards-grid>

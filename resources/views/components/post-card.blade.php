@@ -1,10 +1,12 @@
 @props([
+    'id',
     'title',
     'text',
     'tags',
     'status',
     'updated_at' => '',
     'user' => '',
+    'likes' => 0,
 ])
 
 <x-card>
@@ -28,9 +30,9 @@
             @endforeach
         </div>
         <div class="text-sm">
-            <form action="" method="POST">
+            <form action="{{route('posts.like', $id)}}" method="POST">
                 @csrf
-                <span>like 23</span>
+                <button type="submit">like {{$likes}}</button>
             </form>
         </div>
         <div class="xs:self-center mt-auto flex flex-col xs:flex-row gap-3">

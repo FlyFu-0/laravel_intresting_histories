@@ -1,12 +1,9 @@
 <?php
 
 use App\Models\Post;
-use App\Http\Controllers\{PostController, TagController, UserController};
+use App\Models\Like;
+use App\Http\Controllers\{PostController, TagController, UserController, LikeController};
 use App\Http\Controllers\ProfileController;
-use App\Http\Middleware\ {
-    CanManagePosts,
-    CanManageTags,
-};
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PostController::class, 'index'])->name('index');
@@ -34,6 +31,8 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::prefix('posts')->group(function () {
+        Route::post( '/like/{id}', [LikeController::class, 'create'])->name('posts.like')->can('create', Like::class);
+
         Route::get('/my', [PostController::class, 'myPosts'])->name('posts.my');
         Route::get( '/add', [PostController::class, 'addPost'])->name('posts.add')->can('create', Post::class);
         Route::post( '/create', [PostController::class, 'create'])->name('posts.create')->can('create', Post::class);

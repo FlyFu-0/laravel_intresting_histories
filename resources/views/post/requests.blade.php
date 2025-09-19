@@ -2,6 +2,7 @@
     <x-cards-grid :paginator="$posts">
         @foreach($posts as $post)
             <x-post-card
+                :id="$post->id"
                 :title="$post->title"
                 :text="$post->text"
                 :created_at="$post->created_at"

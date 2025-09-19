@@ -21,6 +21,10 @@ class Post extends Model
         return $this->belongsTo(User::class, 'created_by', 'id');
     }
 
+    public function like() {
+        return $this->hasMany(Like::class, 'post_id', 'id');
+    }
+
     protected function updatedAt(): Attribute
     {
         return Attribute::make(

@@ -7,11 +7,13 @@
     <x-cards-grid :paginator="$posts">
         @foreach($posts as $post)
             <x-post-card
+                :id="$post->id"
                 :title="$post->title"
                 :text="$post->text"
                 :created_at="$post->created_at"
                 :status="$post->status"
                 :tags="$post->tags->pluck('name')"
+                :likes="$post->like->count()"
             >
                 @if($post->status === \App\Models\Post::STATUS_DRAFT)
                     <x-secondary-button
