@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Base\ModelBase;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Post extends ModelBase
 {
     const MAX_TITLE_LENGTH = 70;
     const MAX_STORY_LENGTH = 700;

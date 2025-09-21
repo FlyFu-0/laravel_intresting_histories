@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\Pivot;
+use App\Models\Base\PivotBase;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
-class Like extends Pivot
+class Like extends PivotBase
 {
     protected $table = 'likes';
 
@@ -14,5 +16,15 @@ class Like extends Pivot
 
     public function post() {
         return $this->belongsTo(Post::class, 'post_id', 'id');
+    }
+
+    protected function createdAt(): Attribute
+    {
+        return Attribute::make(
+            get: function (string $value) {
+                $carbonDate = Carbon::parse($value);
+                return $carbonDate->translatedFormat($this->getDatetimeFormat($carbonDate));
+            },
+        );
     }
 }

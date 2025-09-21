@@ -13,7 +13,7 @@
                 :created_at="$post->created_at"
                 :status="$post->status"
                 :tags="$post->tags->pluck('name')"
-                :likes="$post->like->count()"
+                :likes="$post->like"
             >
                 @if($post->status === \App\Models\Post::STATUS_DRAFT)
                     <x-secondary-button
