@@ -20,8 +20,12 @@
                                     <p class="text-sm/6 ">{{$role}}</p>
                                 @endforeach
                                 <div class="inline-flex  sm:hidden flex-col">
-                                    <p class="text-sm/6 text-red-500">{{$user->isBanned() ? __("Banned") : ''}}</p>
-                                    <p class="text-sm/6 text-red-400">{{$user->isMuted() ? __("Muted until :date_until", ['date_until' => $user->muted_until]) : ''}}</p>
+                                    @if($user->isBanned())
+                                        <p class="text-sm/6 text-red-500">{{__("Banned")}}</p>
+                                    @endif
+                                    @if($user->isMuted())
+                                        <p class="text-sm/6 text-red-400">{{__("Muted until :date_until", ['date_until' => $user->muted_until])}}</p>
+                                    @endif
                                 </div>
                             </div>
                         </div>

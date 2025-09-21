@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function index() {
-        $posts = Post::with(['tags', 'user', 'like'])
+        $posts = Post::with(['tags', 'user', 'like', 'like.user', 'comments', 'comments.user'])
             ->where('status', Post::STATUS_PUBLISHED)
             ->latest();
 
@@ -25,7 +25,7 @@ class PostController extends Controller
 
         $search = $request->get('search');
 
-        $postsQuery = Post::with('tags', 'like')
+        $postsQuery = Post::with(['tags', 'like'])
             ->where('created_by', auth()->user()->id)
             ->whereAny(['title', 'text'], 'LIKE', "%$search%")
             ->latest();

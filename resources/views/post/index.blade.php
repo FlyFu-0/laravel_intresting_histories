@@ -14,7 +14,8 @@
                 :updated_at="$post->updated_at"
                 :tags="$post->tags->pluck('name')"
                 :user="$post->user->name"
-                :likes="$post->like->count()"
+                :likes="$post->like"
+                :comments="$post->comments"
             />
         @endforeach
     </x-cards-grid>

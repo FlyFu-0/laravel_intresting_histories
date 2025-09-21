@@ -16,7 +16,7 @@ class UserController extends Controller
 
         $users = [];
         if ($search) {
-            $users = User::with('roles')->where('name', 'like', "%{$search}%")
+            $users = User::with('roles')->where('name', 'likes', "%{$search}%")
                 ->orWhere('email', 'like', "%{$search}%")
                 ->get();
         }

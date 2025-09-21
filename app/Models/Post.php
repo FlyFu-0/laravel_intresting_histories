@@ -27,6 +27,10 @@ class Post extends Model
         return $this->hasMany(Like::class, 'post_id', 'id');
     }
 
+    public function comments() {
+        return $this->hasMany(Comment::class, 'post_id', 'id');
+    }
+
     protected function updatedAt(): Attribute
     {
         return Attribute::make(
