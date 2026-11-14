@@ -28,15 +28,17 @@
             @endisset
 
             <!-- Page Content -->
-            <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-1">
+            <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10">
                 {{ $slot }}
             </main>
 
-            <footer class="bg-white dark:bg-gray-800 shadow dark:text-gray-200 mt-auto">
-                <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-end">
-                    <a href="{{route('changelog')}}">{{__('Changelog')}}</a>
-                </div>
-            </footer>
+{{--            <footer class="bg-white dark:bg-gray-800 shadow dark:text-gray-200 mt-auto">--}}
+{{--                <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-end">--}}
+{{--                    <a href="{{route('changelog')}}">{{__('Changelog')}}</a>--}}
+{{--                </div>--}}
+{{--            </footer>--}}
         </div>
+
+        @stack('scripts')
     </body>
 </html>

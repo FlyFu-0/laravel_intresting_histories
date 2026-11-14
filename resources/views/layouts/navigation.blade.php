@@ -36,6 +36,9 @@
                         </x-dropdown>
                     </div>
                     @endcan
+                    <x-nav-link :href="route('chats.viewAny')" :active="request()->routeIs('chats.viewAny')" :show="auth()->check() && auth()->user()->can('viewAny', App\Models\Chat::class)">
+                        {{ __('Messenger') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('posts.requests')" :active="request()->routeIs('posts.requests')" :show="auth()->check() && auth()->user()->can('viewRequests', App\Models\Post::class)">
                         {{ __('Publish Requests') }}
                     </x-nav-link>

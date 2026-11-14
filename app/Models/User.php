@@ -61,6 +61,13 @@ class User extends Authenticatable
         return $this->hasMany(Post::class, 'created_by', 'id');
      }
 
+    public function chats()
+    {
+        return $this->belongsToMany(Chat::class, 'user_chat')
+            ->withTimestamps()
+            ->withPivot('deleted_at');
+    }
+
      public function session() {
         return $this->hasOne(Session::class)->latestOfMany();
      }

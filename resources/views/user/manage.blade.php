@@ -9,9 +9,9 @@
                     <li class="relative flex justify-between rounded-md gap-x-6 px-4 py-5 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-700 sm:px-6 lg:px-8 {{$isMyself ?  'bg-yellow-100 dark:bg-gray-700 hover:bg-yellow-200 dark:hover:bg-gray-600' : ''}}">
                         <div class="flex min-w-0 gap-x-4">
                             <div class="min-w-0 flex-auto">
-                                <p class="text-sm/6 font-semibold">
+                                <a href="{{route('users.view', $user)}}" class="text-sm/6 font-semibold">
                                     {{$user->name}}
-                                </p>
+                                </a>
                                 <p class="mt-1 flex text-xs/5 text-gray-500 dark:text-gray-400">
                                     <a href="mailto:{{$user->email}}"
                                        class="relative truncate hover:underline">{{$user->email}}</a>

@@ -15,7 +15,7 @@
                 :tags="$post->tags->pluck('name')"
                 :user="$post->user->name"
                 :likes="$post->like"
-                :comments="$post->comments"
+                :comments="$post->comments->count()"
             />
         @endforeach
     </x-cards-grid>

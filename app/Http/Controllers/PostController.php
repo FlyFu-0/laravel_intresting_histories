@@ -35,6 +35,13 @@ class PostController extends Controller
         ]);
     }
 
+    public function view(int $id)
+    {
+
+
+        return view('post.detail', ['post' => Post::find($id)]);
+    }
+
     public function addPost() {
         $tags = Tag::all();
         return view('post.add', ['tags' => $tags]);

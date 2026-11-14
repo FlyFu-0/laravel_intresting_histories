@@ -30,6 +30,10 @@ class UserController extends Controller
         return view('user.manage', ['users' => $users]);
     }
 
+    public function view(User $user) {
+        return view('user.view', ['user' => $user]);
+    }
+
     public function mute(Request $request, User $user)
     {
         Gate::authorize('mute', $user);
